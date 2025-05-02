@@ -2,6 +2,7 @@ import json
 import urllib.parse
 import urllib.request
 import webbrowser
+import os  # Importar el módulo os para abrir archivos con las aplicaciones predeterminadas
 
 # URL base de The Cat API y clave de API
 API_URL = "https://api.thecatapi.com/v1/images/search"
@@ -125,27 +126,21 @@ def advanced_filters():
     fetch_cat_images(params)
 
 def view_saved_data():
-    """Permite al usuario ver los datos guardados en los archivos JSON y TXT."""
-    print("\n1. Ver datos en formato JSON")
-    print("2. Ver datos en formato TXT")
-    choice = input("Selecciona el formato a visualizar (1 o 2): ").strip()
+    """Permite al usuario abrir los archivos JSON y TXT con las aplicaciones predeterminadas."""
+    print("\n1. Abrir datos en formato JSON")
+    print("2. Abrir datos en formato TXT")
+    choice = input("Selecciona el formato a abrir (1 o 2): ").strip()
 
     if choice == "1":
         try:
-            with open("cat_data_clean.json", "r", encoding="utf-8") as f_json:
-                data = json.load(f_json)
-                for item in data:
-                    print(f"URL: {item['url']}")
-                    print(f"Raza: {item['breed']}")
-                    print(f"Origen: {item['origin']}")
-                    print(f"Temperamento: {item['temperament']}")
-                    print("-" * 40)
+            # Abre el archivo JSON con la aplicación predeterminada del sistema
+            os.system("start cat_data_clean.json")
         except FileNotFoundError:
             print("El archivo JSON no se encuentra. Asegúrate de haber guardado datos previamente.")
     elif choice == "2":
         try:
-            with open("cat_data_clean.txt", "r", encoding="utf-8") as f_txt:
-                print(f_txt.read())
+            # Abre el archivo TXT con la aplicación predeterminada del sistema
+            os.system("start cat_data_clean.txt")
         except FileNotFoundError:
             print("El archivo TXT no se encuentra. Asegúrate de haber guardado datos previamente.")
     else:

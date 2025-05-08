@@ -1,24 +1,3 @@
-# 🔧 Instalación automática de librerías si no están presentes
-import importlib
-import subprocess
-import sys
-
-def instalar_si_no(paq):
-    if importlib.util.find_spec(paq) is None:
-        print(f"📦 Instalando '{paq}'...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", paq])
-    else:
-        print(f"✅ Librería '{paq}' ya está instalada.")
-
-# Lista de paquetes requeridos
-paquetes_requeridos = ["pandas", "openpyxl", "matplotlib"]
-
-for paquete in paquetes_requeridos:
-    instalar_si_no(paquete)
-
-# Ahora importa el resto
-
-
 import json
 import os
 import re
@@ -62,7 +41,8 @@ def show_full_data(data):
     if not data:
         print("⚠️ No hay datos para mostrar.")
         return
-    print("\n📋 Mostrando todos los gatos disponibles:\n")
+    #SOLO MUESTRA GATOS CON SUS DATOS COMPLETOS, QUITANDO LOS QUE TIENEN ALGUN DATO FALTANTE NO SON VALIDOS
+    print("\n📋 Mostrando todos los gatos disponibles con datos completos validos:\n")
     for idx, cat in enumerate(data, start=1):
         print(f"Gato #{idx}")
         print(f"• URL         : {cat.get('url', 'N/A')}")
